@@ -7,7 +7,7 @@ import { z } from 'zod';
 const YAML_CONFIG_FILENAME = 'process.config.yaml';
 
 const ProcessConfig = z.object({
-  env: z.string(),
+  env: z.enum(['development', 'production', 'test']),
   port: z.number(),
 });
 
