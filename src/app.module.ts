@@ -1,17 +1,9 @@
 import { Module } from '@nestjs/common';
-import { LoggerModule } from 'nestjs-pino';
 import { ConfiguratorModule } from './infrastructure/modules/configurator.module';
+import { PinoLoggerModule } from './infrastructure/modules/pino-logger.module';
 
 @Module({
-  imports: [
-    ConfiguratorModule,
-    LoggerModule.forRoot({
-      pinoHttp: {
-        level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
-        transport: process.env.NODE_ENV !== 'production' ? { target: 'pino-pretty' } : undefined,
-      },
-    }),
-  ],
+  imports: [ConfiguratorModule, PinoLoggerModule],
   controllers: [],
   providers: [],
 })
