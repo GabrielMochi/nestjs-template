@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { LoggerModule } from 'nestjs-pino';
+import { ConfiguratorModule } from './infrastructure/modules/configurator.module';
 
 @Module({
   imports: [
+    ConfiguratorModule,
     LoggerModule.forRoot({
       pinoHttp: {
         level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
@@ -12,7 +12,7 @@ import { LoggerModule } from 'nestjs-pino';
       },
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
