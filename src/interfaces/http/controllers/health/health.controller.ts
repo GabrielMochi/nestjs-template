@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import {
   DiskHealthIndicator,
-  HealthCheckResult,
+  type HealthCheckResult,
   HealthCheckService,
   MemoryHealthIndicator,
 } from '@nestjs/terminus';
