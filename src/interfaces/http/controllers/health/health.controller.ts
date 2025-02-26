@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
 import {
   DiskHealthIndicator,
   HealthCheckResult,
   HealthCheckService,
   MemoryHealthIndicator,
 } from '@nestjs/terminus';
+import { CheckHealthSwagger } from './health.swagger';
 
 @Controller('health')
 export class HealthController {
@@ -18,23 +18,7 @@ export class HealthController {
   /**
    * Checks the health of various components including the database, memory, and storage.
    */
-  @ApiOkResponse({
-    description: 'The health check was successful.',
-    example: {
-      status: 'ok',
-      info: {
-        memory_heap: { status: 'up' },
-        memory_rss: { status: 'up' },
-        storage: { status: 'up' },
-      },
-      error: {},
-      details: {
-        memory_heap: { status: 'up' },
-        memory_rss: { status: 'up' },
-        storage: { status: 'up' },
-      },
-    },
-  })
+  @CheckHealthSwagger()
   @Get()
   async check(): Promise<HealthCheckResult> {
     return this.health.check([
