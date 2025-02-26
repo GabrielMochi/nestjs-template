@@ -12,7 +12,6 @@ async function bootstrap() {
   const logger = app.get(Logger);
 
   app.useLogger(logger);
-  app.setGlobalPrefix('api');
   app.use(helmet());
 
   const swaggerConfig = new DocumentBuilder()
