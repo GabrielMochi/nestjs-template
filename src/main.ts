@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger } from 'nestjs-pino';
 import { ConfigService } from '@nestjs/config';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -10,6 +11,16 @@ async function bootstrap() {
   const logger = app.get(Logger);
 
   app.useLogger(logger);
+  app.setGlobalPrefix('api');
+
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('NestJS Boilerplate')
+    .setDescription('NestJS Boilerplate API Documentation')
+    .setVersion('1.0')
+    .build();
+
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('docs', app, swaggerDocument, { jsonDocumentUrl: '/docs/json' });
 
   await app.listen(configService.get('process.port') ?? 3000);
   logger.log(`Application is running on: ${await app.getUrl()}`);
