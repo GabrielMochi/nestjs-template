@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { Logger } from 'nestjs-pino';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -12,6 +13,7 @@ async function bootstrap() {
 
   app.useLogger(logger);
   app.setGlobalPrefix('api');
+  app.use(helmet());
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('NestJS Boilerplate')
