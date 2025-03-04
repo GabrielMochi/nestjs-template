@@ -3,9 +3,13 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
+import { ConsoleLogger } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bufferLogs: true });
+  const app = await NestFactory.create(AppModule, {
+    logger: new ConsoleLogger({ json: process.env.NODE_ENV === 'production' }),
+  });
+
   const configService = app.get(ConfigService);
 
   app.setGlobalPrefix('api');
