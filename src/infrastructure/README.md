@@ -5,7 +5,6 @@ The `infrastructure` directory contains external-facing implementations such as 
 ## Structure
 
 - `config/` – Manages application configuration.
-- `modules/` – Implements framework-specific modules (e.g., NestJS modules).
 - `persistence/` – Handles database access and repositories.
 - `adapters/` – Bridges external dependencies (e.g., APIs, message queues).
 
