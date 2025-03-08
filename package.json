@@ -2,7 +2,7 @@
   "name": "nestjs-template",
   "version": "0.1.0",
   "description": "A template project for NestJS applications, providing a pre-configured setup with essential dependencies and scripts for building, testing, and running a NestJS application.",
-  "author": "",
+  "author": "GabrielMochi",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
