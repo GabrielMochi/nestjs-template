@@ -1,6 +1,6 @@
-# Interfaces (Presentation Layer)
+# Presentation
 
-The `interfaces` directory is responsible for handling all external communication with the application.  
+The `presentation` directory is responsible for handling all external communication with the application.  
 It serves as the **entry point** for HTTP requests, WebSocket connections, and other external interactions.
 
 ## Structure
