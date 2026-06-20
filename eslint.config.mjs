@@ -15,12 +15,14 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
+        ...globals.vitest,
       },
       ecmaVersion: 5,
       sourceType: 'module',
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ['vitest.config.mjs', 'vitest.e2e.config.mjs'],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },

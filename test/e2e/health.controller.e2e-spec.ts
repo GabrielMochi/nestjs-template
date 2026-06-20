@@ -1,8 +1,9 @@
-import * as request from 'supertest';
+import request from 'supertest';
 import { Test } from '@nestjs/testing';
 import type { INestApplication } from '@nestjs/common';
 import type { Server } from 'http';
-import { HealthModule } from '@interfaces/http/controllers/health/health.module';
+import { vi } from 'vitest';
+import { HealthModule } from '@presentation/http/controllers/health/health.module';
 import {
   DiskHealthIndicator,
   HealthIndicatorStatus,
@@ -19,17 +20,17 @@ describe('HealthController (e2e)', () => {
   let memoryRSSStatus: HealthIndicatorStatus = DEFAULT_HEALTH_STATUS;
   let storageStatus: HealthIndicatorStatus = DEFAULT_HEALTH_STATUS;
 
-  const mockCheckHeap = jest.fn().mockImplementation(() => {
+  const mockCheckHeap = vi.fn().mockImplementation(() => {
     return Promise.resolve({
       memory_heap: { status: memoryHealthStatus },
     });
   });
 
-  const mockCheckRSS = jest.fn().mockResolvedValue({
+  const mockCheckRSS = vi.fn().mockResolvedValue({
     memory_rss: { status: memoryRSSStatus },
   });
 
-  const mockCheckStorage = jest.fn().mockResolvedValue({
+  const mockCheckStorage = vi.fn().mockResolvedValue({
     storage: { status: storageStatus },
   });
 
@@ -57,7 +58,7 @@ describe('HealthController (e2e)', () => {
     memoryRSSStatus = DEFAULT_HEALTH_STATUS;
     storageStatus = DEFAULT_HEALTH_STATUS;
 
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('/health (GET) with status up', () => {
