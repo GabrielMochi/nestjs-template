@@ -4,4 +4,5 @@ overrides:
 allowBuilds:
   '@scarf/scarf': true
   '@swc/core': true
+  lefthook: true
   unrs-resolver: true

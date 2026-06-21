@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: '*.{json,jsonc,ts,mjs}'
+      run: pnpm exec oxfmt --write {staged_files}
+      stage_fixed: true
+    lint:
+      glob: '*.{ts,mjs}'
+      run: pnpm exec oxlint --fix --type-aware --node-plugin --vitest-plugin --promise-plugin {staged_files}
+      stage_fixed: true
