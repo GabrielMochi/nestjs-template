@@ -1,10 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-  DiskHealthIndicator,
-  type HealthCheckResult,
-  HealthCheckService,
-  MemoryHealthIndicator,
-} from '@nestjs/terminus';
+import { DiskHealthIndicator, HealthCheckService, MemoryHealthIndicator } from '@nestjs/terminus';
+import { type HealthCheckResult } from '@nestjs/terminus';
 import { CheckHealthSwagger } from './health.swagger';
 
 @Controller('health')

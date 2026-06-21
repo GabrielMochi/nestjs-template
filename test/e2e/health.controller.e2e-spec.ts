@@ -4,11 +4,8 @@ import type { INestApplication } from '@nestjs/common';
 import type { Server } from 'http';
 import { vi } from 'vitest';
 import { HealthModule } from '@presentation/http/controllers/health/health.module';
-import {
-  DiskHealthIndicator,
-  HealthIndicatorStatus,
-  MemoryHealthIndicator,
-} from '@nestjs/terminus';
+import type { HealthIndicatorStatus } from '@nestjs/terminus';
+import { DiskHealthIndicator, MemoryHealthIndicator } from '@nestjs/terminus';
 
 const DEFAULT_HEALTH_STATUS: HealthIndicatorStatus = 'up';
 
