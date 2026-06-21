@@ -1,12 +1,12 @@
 import { resolve } from 'node:path';
-import { transform } from '@swc/core';
+import { transform } from 'oxc-transform';
 import { defineConfig } from 'vitest/config';
 
 const tsFilePattern = /\.[cm]?tsx?$/;
 
-function swcNestPlugin() {
+function oxcNestPlugin() {
   return {
-    name: 'swc-nest-transform',
+    name: 'oxc-nest-transform',
     enforce: 'pre',
     /**
      * @param {string} code
@@ -17,25 +17,24 @@ function swcNestPlugin() {
         return null;
       }
 
-      const result = await transform(code, {
-        filename: id,
-        sourceMaps: true,
-        module: {
-          type: 'es6',
+      const result = await transform(id, code, {
+        lang: id.endsWith('x') ? 'tsx' : 'ts',
+        sourceType: 'module',
+        sourcemap: true,
+        target: 'es2023',
+        typescript: {
+          onlyRemoveTypeImports: false,
         },
-        jsc: {
-          target: 'es2023',
-          keepClassNames: true,
-          parser: {
-            syntax: 'typescript',
-            decorators: true,
-          },
-          transform: {
-            legacyDecorator: true,
-            decoratorMetadata: true,
-          },
+        decorator: {
+          legacy: true,
+          emitDecoratorMetadata: true,
+          strictNullChecks: true,
         },
       });
+
+      if (result.errors.length > 0) {
+        throw new Error(result.errors.map((error) => error.message).join('\n'));
+      }
 
       return {
         code: result.code,
@@ -46,7 +45,7 @@ function swcNestPlugin() {
 }
 
 export default defineConfig({
-  plugins: [swcNestPlugin()],
+  plugins: [oxcNestPlugin()],
   resolve: {
     alias: {
       '@core': resolve(import.meta.dirname, 'src/core'),
