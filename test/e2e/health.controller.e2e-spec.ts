@@ -12,6 +12,8 @@ import {
 
 const DEFAULT_HEALTH_STATUS: HealthIndicatorStatus = 'up';
 
+type HealthIndicatorMock = () => Promise<Record<string, { status: HealthIndicatorStatus }>>;
+
 describe('HealthController (e2e)', () => {
   let app: INestApplication<Server>;
 
@@ -20,17 +22,17 @@ describe('HealthController (e2e)', () => {
   let memoryRSSStatus: HealthIndicatorStatus = DEFAULT_HEALTH_STATUS;
   let storageStatus: HealthIndicatorStatus = DEFAULT_HEALTH_STATUS;
 
-  const mockCheckHeap = vi.fn().mockImplementation(() => {
+  const mockCheckHeap = vi.fn<HealthIndicatorMock>().mockImplementation(() => {
     return Promise.resolve({
       memory_heap: { status: memoryHealthStatus },
     });
   });
 
-  const mockCheckRSS = vi.fn().mockResolvedValue({
+  const mockCheckRSS = vi.fn<HealthIndicatorMock>().mockResolvedValue({
     memory_rss: { status: memoryRSSStatus },
   });
 
-  const mockCheckStorage = vi.fn().mockResolvedValue({
+  const mockCheckStorage = vi.fn<HealthIndicatorMock>().mockResolvedValue({
     storage: { status: storageStatus },
   });
 
