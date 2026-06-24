@@ -70,7 +70,7 @@ describe('SherlockService', () => {
     child.emit('close', 0);
     await stream;
 
-    expect(spawnMock).toHaveBeenCalledWith('sherlock', ['--no-color', '--local', '--nsfw', 'foo'], {
+    expect(spawnMock).toHaveBeenCalledWith('sherlock', ['--no-color', '--nsfw', 'foo'], {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     expect(cache.set).toHaveBeenCalledWith(

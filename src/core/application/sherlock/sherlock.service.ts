@@ -65,7 +65,7 @@ export class SherlockService {
     signal: AbortSignal,
     onEvent: (event: SherlockEvent) => void,
   ): Promise<SherlockCacheableEvent[]> {
-    const args = ['--no-color', '--local', ...(nsfw ? ['--nsfw'] : []), username];
+    const args = ['--no-color', ...(nsfw ? ['--nsfw'] : []), username];
     const child = spawn('sherlock', args, { stdio: ['ignore', 'pipe', 'pipe'] });
     const events: SherlockCacheableEvent[] = [];
     const stdout = child.stdout;
