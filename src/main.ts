@@ -16,8 +16,8 @@ async function bootstrap() {
   app.use(helmet());
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Sherlock Web Server')
-    .setDescription('Sherlock Web Server API Documentation')
+    .setTitle('NestJS Template')
+    .setDescription('NestJS Template API Documentation')
     .setVersion('1.0')
     .build();
 

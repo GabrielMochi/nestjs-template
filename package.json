@@ -1,7 +1,7 @@
 {
-  "name": "sherlock-web-server",
+  "name": "nestjs-template",
   "version": "0.1.0",
-  "description": "NestJS SSE server for Sherlock username searches.",
+  "description": "NestJS Template",
   "license": "UNLICENSED",
   "author": "GabrielMochi",
   "scripts": {
