@@ -6,12 +6,14 @@ import { z } from 'zod';
 
 const YAML_CONFIG_FILENAME = 'process.config.yaml';
 
-const ProcessConfig = z.object({
+const processConfigSchema = z.object({
   env: z.enum(['development', 'production', 'test']),
   port: z.number(),
 });
 
+export type ProcessConfig = z.infer<typeof processConfigSchema>;
+
 export default registerAs('process', () => {
   const config = yaml.load(readFileSync(join(__dirname, YAML_CONFIG_FILENAME), 'utf8'));
-  return ProcessConfig.parse(config);
+  return processConfigSchema.parse(config);
 });
