@@ -1,6 +1,5 @@
 import { resolve } from 'node:path';
 import { transform } from 'oxc-transform';
-import { defineConfig } from 'vitest/config';
 
 const tsFilePattern = /\.[cm]?tsx?$/;
 
@@ -44,18 +43,17 @@ function oxcNestPlugin() {
   };
 }
 
-export default defineConfig({
+export const sharedConfig = {
   plugins: [oxcNestPlugin()],
   resolve: {
     alias: {
-      '@core': resolve(import.meta.dirname, 'src/core'),
-      '@infrastructure': resolve(import.meta.dirname, 'src/infrastructure'),
-      '@presentation': resolve(import.meta.dirname, 'src/presentation'),
+      '@core': resolve(import.meta.dirname, '../src/core'),
+      '@infrastructure': resolve(import.meta.dirname, '../src/infrastructure'),
+      '@presentation': resolve(import.meta.dirname, '../src/presentation'),
     },
   },
   test: {
     environment: 'node',
     globals: true,
-    include: ['test/**/*.e2e-spec.ts'],
   },
-});
+};
