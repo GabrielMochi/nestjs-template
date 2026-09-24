@@ -14,7 +14,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "test": "vitest run --config ./.vitest/vitest.config.mjs",
     "test:watch": "vitest --config ./.vitest/vitest.config.mjs",
     "test:cov": "vitest run --coverage --config ./.vitest/vitest.config.mjs",
