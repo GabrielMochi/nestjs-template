@@ -5,7 +5,7 @@ export default defineConfig({
   ...sharedConfig,
   test: {
     ...sharedConfig.test,
-    include: ['src/**/*.spec.ts'],
+    include: ['test/unit/**/*.spec.ts'],
     passWithNoTests: true,
     coverage: {
       provider: 'v8',
